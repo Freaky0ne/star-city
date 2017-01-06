@@ -1,7 +1,7 @@
 // Creating variables
 endlessCanvas = true;
 var selectedCelX, selectedCelY;
-var selectedType = NaN, selectedTypeX = NaN, selectedTypeY = NaN;
+var selectedType = 0, selectedTypeX = NaN, selectedTypeY = NaN;
 var houseLv1 = new Image(), houseLv1Builded = new Image(), houseLv2 = new Image(), houseLv3 = new Image();
 houseLv1.src = "houseLv1.png";
 houseLv1Builded.src = "houseLv1Builded.png";
@@ -59,8 +59,20 @@ function select_building(){
   }
 }
 function make_building(type) {
-  if (field.field[selectedCelX][selectedCelY] < 1) {
-    field.field[selectedCelX][selectedCelY] = type;
+  if (type >= 2) {
+    if (field.field[selectedCelX][selectedCelY] < 1) {
+      field.field[selectedCelX][selectedCelY] = type;
+    }
+  }
+  if (type == 1) {
+    if (field.field[selectedCelX][selectedCelY] == 0) {
+      field.field[selectedCelX][selectedCelY] = type;
+    }
+  }
+  if (type == 0) {
+    if (field.field[selectedCelX][selectedCelY]  == 1) {
+      field.field[selectedCelX][selectedCelY] = type;
+    }
   }
 }
 function make_grid() {
@@ -201,7 +213,7 @@ function draw_floating_menu(){
   context.fillRect(floatingX - 175, floatingY + 10, 50, 50);
   context.drawImage(houseLv1, floatingX - 175, floatingY + 10, 50, 50);
   context.fillStyle = "orange";
-  context.fillRect(selectedTypeX, selectedTypeY + 50, 50, 10);
+  context.fillRect(selectedTypeX, selectedTypeY + 60, 50, 5);
   if (floatingMenu) {
     make_arrow_backward(buttonFloatingX, buttonFloatingY + 3, 5, 6);
   }else{
